@@ -13,7 +13,7 @@ Configuration:
       target: SYSTEM_OUT
       ThresholdFilter:
         # 修改为“debug”可查看DEBUG级日志
-        level: info
+        level: error # info
         onMatch: ACCEPT
         onMismatch: DENY
       PatternLayout:

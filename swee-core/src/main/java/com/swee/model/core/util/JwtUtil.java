@@ -2,6 +2,8 @@ package com.swee.model.core.util;
 
 import java.util.Map;
 import java.util.Optional;
+import com.swee.model.core.commonmodel.User;
+import com.swee.model.core.constant.SignConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtException;
@@ -11,7 +13,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtUtil {
 
-    private final static String secret = "swee-micro";
+    private final static String secret = "swee-model";
 
     public static String encode(String key, Map<String,Object> param, String salt){
         if(salt!=null){
@@ -49,7 +51,7 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-   /* public static User user(String token) {
+    public static User user(String token) {
         Optional<Claims> claimsOpt = Optional.of(getClaims(token));
         if (claimsOpt.isPresent()) {
             Claims claims = claimsOpt.get();
@@ -66,6 +68,6 @@ public class JwtUtil {
             return user;
         }
         return null;
-    }*/
+    }
 
 }

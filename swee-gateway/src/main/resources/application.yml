@@ -1,0 +1,100 @@
+# 所有“占位符”属性均由profile指定
+# core节点下属性映射到CoreProperties类
+
+########################
+##                    ##
+##       Common       ##
+##                    ##
+########################
+
+debug: 占位符
+
+server:
+
+  port: 占位符
+
+spring:
+
+  profiles.active: ${profile}
+
+
+logging:
+
+  config: #未被覆盖时使用默认log4j2.yml
+
+core:
+
+  address: 占位符
+
+  redis-namespace: sweeAuth
+
+  time:
+    default-date-pattern: yyyy-MM-dd
+    default-time-pattern: HH:mm:ss
+    default-datetime-pattern: yyyy-MM-dd HH:mm:ss
+    serialize-java-util-date-to-timestamp: true
+
+  file:
+    mapping: 占位符
+    location: 占位符
+
+  email:
+    server-host: smtp.163.com
+    server-port: 25
+    addresser-name: # TODO E-Mail
+    addresser-email: # TODO E-Mail
+    addresser-auth-code: # TODO E-Mail
+
+---
+########################
+##                    ##
+##     Devlopment     ##
+##                    ##
+########################
+
+debug: true
+
+server:
+  port: 8090
+
+spring:
+  #active
+  profiles: dev
+  application:
+    name: swee-gateway
+  #nacos discovery
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: baidu_route
+          uri: https://www.baidu.com
+          predicates:
+            - Query=url,baidu
+
+        - id: qq_route
+          uri: https://www.qq.com
+          predicates:
+            - Query=url,qq
+
+  #    sentinel:
+#      transport:
+#        dashboard: localhost:8080
+#        port: 8719
+
+
+logging:
+
+  config:
+
+core:
+
+  address: http://localhost:8091
+
+  file:
+    mapping: /static/
+    location: C:/swee-auth-static/
+
+
